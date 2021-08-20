@@ -61,7 +61,7 @@ function sendEventsToAll(newInvoice) {
 
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
-async function getInvoice(invoiceId) {
+function getInvoice(invoiceId) {
     // TODO change url to local address on RPi
     var url = `https://btcpay.atitlan.io/api/v1/stores/AE5cyxSv4zBMadQVRVNJNjAdwYrjDozNFQm95gBE7EXJ/invoices/${invoiceId}`;
     var xhr = new XMLHttpRequest();
@@ -96,12 +96,12 @@ async function getInvoice(invoiceId) {
 async function addInvoice(request, response, next) {
   console.log("meow", request.body)
   getInvoice(request.body.invoiceId)
-  .then( (newInvoice) => {
-    invoices.push(newInvoice);
-    response.json(newInvoice)
-    return sendEventsToAll(newInvoice);
-  })
-  .catch((e) => console.log(e))
+    .then( (newInvoice) => {
+      invoices.push(newInvoice);
+      response.json(newInvoice)
+      return sendEventsToAll(newInvoice);
+      })
+    .catch((e) => console.log(e))
 }
 
 app.post('/invoicePaid', addInvoice);
