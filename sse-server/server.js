@@ -97,6 +97,8 @@ async function addInvoice(request, response, next) {
   console.log("meow", request.body)
   getInvoice(request.body.invoiceId)
     .then( (newInvoice) => {
+      console.log(request.body.timestamp)
+      newInvoice['time'] = request.body.timestamp
       invoices.push(newInvoice);
       response.json(newInvoice)
       return sendEventsToAll(newInvoice);
