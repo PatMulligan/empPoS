@@ -31,7 +31,7 @@ function App() {
       </thead>
       <tbody>
         {
-          invoices.map((invoice, i) =>
+          invoices.reverse().map((invoice, i) =>
             <tr key={i}>
               <td>{invoice.id}</td>
               <td>{invoice.amount}</td>
