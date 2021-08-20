@@ -8,7 +8,7 @@ function App() {
 
   useEffect( () => {
     if (!listening) {
-      const events = new EventSource('http://localhost:3000/events');
+      const events = new EventSource('http://localhost:2001/events');
 
       events.onmessage = (event) => {
         console.log(event)
