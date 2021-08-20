@@ -78,9 +78,12 @@ async function getInvoice(invoiceId) {
     return new Promise( function(resolve, reject) {
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {
+              if (xhr.status == 200) {
                 console.log(xhr.status);
                 console.log(xhr.responseText) 
                 resolve(JSON.parse(xhr.responseText))
+              }
+              else {reject(xhr.status)}
             }}
 
 
@@ -92,10 +95,13 @@ async function getInvoice(invoiceId) {
 
 async function addInvoice(request, response, next) {
   console.log("meow", request.body)
-  const newInvoice = await getInvoice(request.body.invoiceId);
-  invoices.push(newInvoice);
-  response.json(newInvoice)
-  return sendEventsToAll(newInvoice);
+  getInvoice(request.body.invoiceId)
+  .then( (newInvoice) => {
+    invoices.push(newInvoice);
+    response.json(newInvoice)
+    return sendEventsToAll(newInvoice);
+  })
+  .catch((e) => console.log(e))
 }
 
 app.post('/invoicePaid', addInvoice);
