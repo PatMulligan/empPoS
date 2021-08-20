@@ -22,24 +22,22 @@ function App() {
     }, [listening, invoices]);
 
   return (
-    <table className="stats-table">
-      <thead>
-        <tr>
-          <th>Invoice ID</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          invoices.slice().reverse().map((invoice, i) =>
-            <tr key={i}>
-              <td>{invoice.id}</td>
-              <td>{invoice.amount}</td>
-            </tr>
-          )
-        }
-      </tbody>
-    </table>
+    <body>
+      <div id="outer">
+      {
+        invoices.slice().reverse().map((invoice, i) =>
+          <div id="inner" class="card align-items-center" key={i}>
+            <img src="https://btcpay.atitlan.io/LocalStorage/e2eaf488-8cc3-482e-ae27-b53a851d8203-green_check.png" alt="Avatar"></img>
+            <div class="container">
+              <h4><b>{invoice.id}</b></h4>
+              <p>Paid: <strong>{invoice.amount} GTQ</strong></p>
+              <p>{new Date(invoice.time).toLocaleDateString("en-US", { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</p>
+            </div>
+          </div>
+        )
+      }
+      </div>
+    </body>
   );
 }
 
