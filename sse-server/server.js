@@ -11,7 +11,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 app.get('/status', (request, response) => response.json({clients: clients.length}));
 
-const PORT = 3000;
+const PORT = 2001;
 
 let clients = [];
 let invoices = [];
@@ -63,7 +63,8 @@ var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 
 function getInvoice(invoiceId) {
     // TODO change url to local address on RPi
-    var url = `https://btcpay.atitlan.io/api/v1/stores/AE5cyxSv4zBMadQVRVNJNjAdwYrjDozNFQm95gBE7EXJ/invoices/${invoiceId}`;
+    //var url = `https://btcpay.atitlan.io/api/v1/stores/AE5cyxSv4zBMadQVRVNJNjAdwYrjDozNFQm95gBE7EXJ/invoices/${invoiceId}`;
+    var url = `http://emporiopi.local/api/v1/stores/AE5cyxSv4zBMadQVRVNJNjAdwYrjDozNFQm95gBE7EXJ/invoices/${invoiceId}`;
     var xhr = new XMLHttpRequest();
     xhr.open("GET", url);
 
